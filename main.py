@@ -22,7 +22,6 @@ def main(page: ft.Page):
             ft.colors.PURPLE,
             ft.colors.RED,
             ft.colors.TEAL,
-            ft.colors.YELLOW,
         ]
         return colors_lookup[hash(user_name) % len(colors_lookup)]
     
