@@ -26,7 +26,7 @@ brew services stop mongodb-community@7.0
 
 ### App Screenshot
 
-![screenshot](https://github.com/kmranrg/Student_DB_MongoDB/blob/main/screenshots/app.png)
+![screenshot](https://github.com/kmranrg/Student_DB_MongoDB/blob/main/screenshots/ss01.png)
 
 ### Packages to Download
 + [Download MongoDB Community Edition](https://www.mongodb.com/docs/manual/administration/install-community/)
