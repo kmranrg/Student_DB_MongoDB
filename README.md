@@ -12,3 +12,7 @@ To run the app:
 ```
 flet run [app_directory]
 ```
+
+### App Screenshot
+
+![screenshot](https://github.com/kmranrg/Student_DB_MongoDB/blob/main/screenshots/app.png)
