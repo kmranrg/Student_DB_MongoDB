@@ -20,23 +20,22 @@ class StudentDB():
             self.df["Joined_On"] = pd.to_datetime(self.df["Joined_On"])
             self.df["S_DOB"] = pd.to_datetime(self.df["S_DOB"])
 
-            # converting phone numbers to string format and also adding + in front
+            # converting phone numbers to string format and also adding + in front of it
             def add_plus(phone_no):
                 return "+" + phone_no
             self.df["Personal_Phone"] = self.df["Personal_Phone"].astype(str).apply(add_plus)
             self.df["Parent_Phone"] = self.df["Parent_Phone"].astype(str).apply(add_plus)
 
-            # creating mongoDB client
+            # creating mongodb client
             self.client = MongoClient(self.mongodb_uri)
 
-            # accessing the specified database and connection
             self.db = self.client[self.database_name]
             self.collection = self.db[self.collection_name]
 
             # converting the dataframe to list of dictionaries (one dictionary per row)
             self.data = self.df.to_dict(orient="records")
 
-            # inserting the data into MongoDB collection
+            # inserting the data into MongoDB Collection
             self.collection.insert_many(self.data)
 
         except Exception as e:
@@ -46,13 +45,12 @@ class StudentDB():
             # closing the mongoDB connection
             self.client.close()
             return "Data loaded in MongoDB successfully."
-
+        
     def get_all_students(self):
         try:
-            # creating mongoDB client
+            # creating mongodb client
             self.client = MongoClient(self.mongodb_uri)
 
-            # accessing the specified database and connection
             self.db = self.client[self.database_name]
             self.collection = self.db[self.collection_name]
 
@@ -75,21 +73,20 @@ class StudentDB():
             for student in result:
                 student["S_DOB"] = parser.parse(str(student["S_DOB"])).strftime("%B %d, %Y")
                 students.append(student)
-            return students
 
+            return students
+        
         except Exception as e:
             print(f"Error: {e}")
 
         finally:
-            # closing the mongoDB connection
             self.client.close()
 
     def rating_more_than_7(self):
         try:
-            # creating mongoDB client
+            # creating mongodb client
             self.client = MongoClient(self.mongodb_uri)
 
-            # accessing the specified database and connection
             self.db = self.client[self.database_name]
             self.collection = self.db[self.collection_name]
 
@@ -113,21 +110,20 @@ class StudentDB():
             for student in result:
                 student["S_DOB"] = parser.parse(str(student["S_DOB"])).strftime("%B %d, %Y")
                 students.append(student)
-            return students
 
+            return students
+        
         except Exception as e:
             print(f"Error: {e}")
 
         finally:
-            # closing the mongoDB connection
             self.client.close()
 
-    def rating_less_than_7(self):
+    def rating_less_than_4(self):
         try:
-            # creating mongoDB client
+            # creating mongodb client
             self.client = MongoClient(self.mongodb_uri)
 
-            # accessing the specified database and connection
             self.db = self.client[self.database_name]
             self.collection = self.db[self.collection_name]
 
@@ -151,21 +147,20 @@ class StudentDB():
             for student in result:
                 student["S_DOB"] = parser.parse(str(student["S_DOB"])).strftime("%B %d, %Y")
                 students.append(student)
-            return students
 
+            return students
+        
         except Exception as e:
             print(f"Error: {e}")
 
         finally:
-            # closing the mongoDB connection
             self.client.close()
 
     def born_after_june_01_1999(self):
         try:
-            # creating mongoDB client
+            # creating mongodb client
             self.client = MongoClient(self.mongodb_uri)
 
-            # accessing the specified database and connection
             self.db = self.client[self.database_name]
             self.collection = self.db[self.collection_name]
 
@@ -191,21 +186,20 @@ class StudentDB():
             for student in result:
                 student["S_DOB"] = parser.parse(str(student["S_DOB"])).strftime("%B %d, %Y")
                 students.append(student)
-            return students
 
+            return students
+        
         except Exception as e:
             print(f"Error: {e}")
 
         finally:
-            # closing the mongoDB connection
             self.client.close()
 
-    def query_database(self,user_query):
+    def query_database(self, user_query):
         try:
-            # creating mongoDB client
+            # creating mongodb client
             self.client = MongoClient(self.mongodb_uri)
 
-            # accessing the specified database and connection
             self.db = self.client[self.database_name]
             self.collection = self.db[self.collection_name]
 
@@ -227,26 +221,28 @@ class StudentDB():
             for student in result:
                 student["S_DOB"] = parser.parse(str(student["S_DOB"])).strftime("%B %d, %Y")
                 students.append(student)
-            return students
 
+            return students
+        
         except Exception as e:
             print(f"Error: {e}")
 
         finally:
-            # closing the mongoDB connection
             self.client.close()
 
     def drop_database(self):
-        # Connect to MongoDB
-        client = MongoClient("mongodb://localhost:27017")
-        
-        # Drop the specified database
+        # connect to MongoDB
+        self.client = MongoClient(self.mongodb_uri)
+
         try:
-            client.drop_database(self.database_name)
+            self.client.drop_database(self.database_name)
         except Exception as e:
-            print(f"An error occurred: {e}")
+            print(f"An error occured: {e}")
         finally:
+            self.client.close()
             return "Database has been dropped."
+            
+        
 
 # students = StudentDB()
 # print(students.load_data_from_csv())
