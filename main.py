@@ -2,13 +2,12 @@ import flet as ft
 from studentDB import StudentDB
 import json
 
-def main(page: ft.Page):
+def main(page:ft.Page):
     page.theme_mode = "light"
     page.window_width = 750
     page.window_height = 830
     page.scroll = "auto"
     page.title = "Student Database in MongoDB"
-    page.window_bgcolor = "#16225e"
 
     students = StudentDB()
 
@@ -25,25 +24,25 @@ def main(page: ft.Page):
             ft.colors.PINK,
             ft.colors.PURPLE,
             ft.colors.RED,
-            ft.colors.TEAL,
+            ft.colors.TEAL
         ]
-        return colors_lookup[hash(user_name) % len(colors_lookup)]
+        return colors_lookup[ hash(user_name) % len(colors_lookup) ]
     
     def devInfo(e):
-        page.snack_bar = ft.SnackBar(ft.Text(f"Designed and Developed by: Kumar Anurag | Instagram: kmranrg",text_align="center"),bgcolor="#16225e",padding=8)
+        page.snack_bar = ft.SnackBar(ft.Text(f"Designed and Developed by: Kumar Anurag | Instagram: kmranrg", text_align="center"),bgcolor="#16225e",padding=8)
         page.snack_bar.open = True
         page.update()
 
     page.appbar = ft.AppBar(
-        leading=ft.Icon(ft.icons.SCHOOL,color="#ffca02",size=40),
+        leading=ft.Icon(ft.icons.SCHOOL, color="#ffca02", size=40),
         leading_width=60,
         title=ft.Text("SmartGurucool",color=ft.colors.WHITE),
         center_title=False,
         bgcolor="#16225e",
         actions=[
-            ft.IconButton(ft.icons.NOTIFICATIONS,icon_color=ft.colors.WHITE),
-            ft.IconButton(ft.icons.PERSON,icon_color=ft.colors.WHITE,on_click=devInfo),
-        ],
+            ft.IconButton(ft.icons.NOTIFICATIONS, icon_color=ft.colors.WHITE),
+            ft.IconButton(ft.icons.PERSON, icon_color=ft.colors.WHITE, on_click=devInfo)
+        ]
     )
 
     def get_all_students(e):
@@ -54,31 +53,31 @@ def main(page: ft.Page):
             initials = ''.join(word[0] for word in sname)
             student_container_content = ft.Row([
                 ft.Column([
-                    ft.Text(value=s["Name"],style="titleLarge",color="#16225e"),
-                    ft.Text(value=s["Email_ID"],style="labelLarge"),
+                    ft.Text(value=s["Name"],style='titleLarge',color="#16225e"),
+                    ft.Text(value=s["Email_ID"],style='labelLarge'),
                     ft.Row([
                         ft.Row([
                             ft.Icon(name=ft.icons.SMART_TOY,color="#16225e"),
-                            ft.Text(value=f'{s["S_DOB"]}',style="labelLarge")
+                            ft.Text(value=f'{s["S_DOB"]}',style='labelLarge'),
                         ]),
                         ft.Row([
                             ft.Icon(name=ft.icons.STAR,color="#16225e"),
-                            ft.Text(value=f'{s["Student_Rating"]}',style="labelLarge")
-                        ])
+                            ft.Text(value=f'{s["Student_Rating"]}',style='labelLarge'),
+                        ]),
                     ]),
                     ft.Row([
                         ft.Row([
                             ft.Icon(name=ft.icons.LOCAL_PHONE,color="#16225e"),
-                            ft.Text(value=f'{s["Personal_Phone"]}',style="labelLarge")
+                            ft.Text(value=f'{s["Personal_Phone"]}',style='labelLarge'),
                         ]),
                         ft.Row([
                             ft.Icon(name=ft.icons.FLAG,color="#16225e"),
-                            ft.Text(value=f'{s["Country"]}',style="labelLarge")
+                            ft.Text(value=f'{s["Country"]}',style='labelLarge'),
                         ]),
-                    ])
+                    ]),
                 ]),
                 ft.CircleAvatar(
-                    content=ft.Text(initials,size=30,color=ft.colors.WHITE),
+                    content=ft.Text(initials, size=30, color=ft.colors.WHITE),
                     bgcolor=get_avatar_color(s["Name"]),
                     radius=40
                 )
@@ -97,7 +96,7 @@ def main(page: ft.Page):
             )
         student_column.controls = items
         page.update()
-
+    
     def load_csv(e):
         response = students.load_data_from_csv()
         dlg = ft.AlertDialog(
@@ -126,31 +125,31 @@ def main(page: ft.Page):
             initials = ''.join(word[0] for word in sname)
             student_container_content = ft.Row([
                 ft.Column([
-                    ft.Text(value=s["Name"],style="titleLarge",color="#16225e"),
-                    ft.Text(value=s["Email_ID"],style="labelLarge"),
+                    ft.Text(value=s["Name"],style='titleLarge',color="#16225e"),
+                    ft.Text(value=s["Email_ID"],style='labelLarge'),
                     ft.Row([
                         ft.Row([
                             ft.Icon(name=ft.icons.SMART_TOY,color="#16225e"),
-                            ft.Text(value=f'{s["S_DOB"]}',style="labelLarge")
+                            ft.Text(value=f'{s["S_DOB"]}',style='labelLarge'),
                         ]),
                         ft.Row([
                             ft.Icon(name=ft.icons.STAR,color="#16225e"),
-                            ft.Text(value=f'{s["Student_Rating"]}',style="labelLarge")
-                        ])
+                            ft.Text(value=f'{s["Student_Rating"]}',style='labelLarge'),
+                        ]),
                     ]),
                     ft.Row([
                         ft.Row([
                             ft.Icon(name=ft.icons.LOCAL_PHONE,color="#16225e"),
-                            ft.Text(value=f'{s["Personal_Phone"]}',style="labelLarge")
+                            ft.Text(value=f'{s["Personal_Phone"]}',style='labelLarge'),
                         ]),
                         ft.Row([
                             ft.Icon(name=ft.icons.FLAG,color="#16225e"),
-                            ft.Text(value=f'{s["Country"]}',style="labelLarge")
+                            ft.Text(value=f'{s["Country"]}',style='labelLarge'),
                         ]),
-                    ])
+                    ]),
                 ]),
                 ft.CircleAvatar(
-                    content=ft.Text(initials,size=30,color=ft.colors.WHITE),
+                    content=ft.Text(initials, size=30, color=ft.colors.WHITE),
                     bgcolor=get_avatar_color(s["Name"]),
                     radius=40
                 )
@@ -178,31 +177,31 @@ def main(page: ft.Page):
             initials = ''.join(word[0] for word in sname)
             student_container_content = ft.Row([
                 ft.Column([
-                    ft.Text(value=s["Name"],style="titleLarge",color="#16225e"),
-                    ft.Text(value=s["Email_ID"],style="labelLarge"),
+                    ft.Text(value=s["Name"],style='titleLarge',color="#16225e"),
+                    ft.Text(value=s["Email_ID"],style='labelLarge'),
                     ft.Row([
                         ft.Row([
                             ft.Icon(name=ft.icons.SMART_TOY,color="#16225e"),
-                            ft.Text(value=f'{s["S_DOB"]}',style="labelLarge")
+                            ft.Text(value=f'{s["S_DOB"]}',style='labelLarge'),
                         ]),
                         ft.Row([
                             ft.Icon(name=ft.icons.STAR,color="#16225e"),
-                            ft.Text(value=f'{s["Student_Rating"]}',style="labelLarge")
-                        ])
+                            ft.Text(value=f'{s["Student_Rating"]}',style='labelLarge'),
+                        ]),
                     ]),
                     ft.Row([
                         ft.Row([
                             ft.Icon(name=ft.icons.LOCAL_PHONE,color="#16225e"),
-                            ft.Text(value=f'{s["Personal_Phone"]}',style="labelLarge")
+                            ft.Text(value=f'{s["Personal_Phone"]}',style='labelLarge'),
                         ]),
                         ft.Row([
                             ft.Icon(name=ft.icons.FLAG,color="#16225e"),
-                            ft.Text(value=f'{s["Country"]}',style="labelLarge")
+                            ft.Text(value=f'{s["Country"]}',style='labelLarge'),
                         ]),
-                    ])
+                    ]),
                 ]),
                 ft.CircleAvatar(
-                    content=ft.Text(initials,size=30,color=ft.colors.WHITE),
+                    content=ft.Text(initials, size=30, color=ft.colors.WHITE),
                     bgcolor=get_avatar_color(s["Name"]),
                     radius=40
                 )
@@ -222,39 +221,39 @@ def main(page: ft.Page):
         student_column.controls = items
         page.update()
 
-    def less_than_7(e):
+    def less_than_4(e):
         items = []
-        student_list = students.rating_less_than_7()
+        student_list = students.rating_less_than_4()
         for s in student_list:
             sname = s["Name"].split()
             initials = ''.join(word[0] for word in sname)
             student_container_content = ft.Row([
                 ft.Column([
-                    ft.Text(value=s["Name"],style="titleLarge",color="#16225e"),
-                    ft.Text(value=s["Email_ID"],style="labelLarge"),
+                    ft.Text(value=s["Name"],style='titleLarge',color="#16225e"),
+                    ft.Text(value=s["Email_ID"],style='labelLarge'),
                     ft.Row([
                         ft.Row([
                             ft.Icon(name=ft.icons.SMART_TOY,color="#16225e"),
-                            ft.Text(value=f'{s["S_DOB"]}',style="labelLarge")
+                            ft.Text(value=f'{s["S_DOB"]}',style='labelLarge'),
                         ]),
                         ft.Row([
                             ft.Icon(name=ft.icons.STAR,color="#16225e"),
-                            ft.Text(value=f'{s["Student_Rating"]}',style="labelLarge")
-                        ])
+                            ft.Text(value=f'{s["Student_Rating"]}',style='labelLarge'),
+                        ]),
                     ]),
                     ft.Row([
                         ft.Row([
                             ft.Icon(name=ft.icons.LOCAL_PHONE,color="#16225e"),
-                            ft.Text(value=f'{s["Personal_Phone"]}',style="labelLarge")
+                            ft.Text(value=f'{s["Personal_Phone"]}',style='labelLarge'),
                         ]),
                         ft.Row([
                             ft.Icon(name=ft.icons.FLAG,color="#16225e"),
-                            ft.Text(value=f'{s["Country"]}',style="labelLarge")
+                            ft.Text(value=f'{s["Country"]}',style='labelLarge'),
                         ]),
-                    ])
+                    ]),
                 ]),
                 ft.CircleAvatar(
-                    content=ft.Text(initials,size=30,color=ft.colors.WHITE),
+                    content=ft.Text(initials, size=30, color=ft.colors.WHITE),
                     bgcolor=get_avatar_color(s["Name"]),
                     radius=40
                 )
@@ -273,7 +272,7 @@ def main(page: ft.Page):
             )
         student_column.controls = items
         page.update()
-    
+
     def run_query(e):
         items = []
         student_list = students.query_database(json.loads(query_bar.value))
@@ -282,31 +281,31 @@ def main(page: ft.Page):
             initials = ''.join(word[0] for word in sname)
             student_container_content = ft.Row([
                 ft.Column([
-                    ft.Text(value=s["Name"],style="titleLarge",color="#16225e"),
-                    ft.Text(value=s["Email_ID"],style="labelLarge"),
+                    ft.Text(value=s["Name"],style='titleLarge',color="#16225e"),
+                    ft.Text(value=s["Email_ID"],style='labelLarge'),
                     ft.Row([
                         ft.Row([
                             ft.Icon(name=ft.icons.SMART_TOY,color="#16225e"),
-                            ft.Text(value=f'{s["S_DOB"]}',style="labelLarge")
+                            ft.Text(value=f'{s["S_DOB"]}',style='labelLarge'),
                         ]),
                         ft.Row([
                             ft.Icon(name=ft.icons.STAR,color="#16225e"),
-                            ft.Text(value=f'{s["Student_Rating"]}',style="labelLarge")
-                        ])
+                            ft.Text(value=f'{s["Student_Rating"]}',style='labelLarge'),
+                        ]),
                     ]),
                     ft.Row([
                         ft.Row([
                             ft.Icon(name=ft.icons.LOCAL_PHONE,color="#16225e"),
-                            ft.Text(value=f'{s["Personal_Phone"]}',style="labelLarge")
+                            ft.Text(value=f'{s["Personal_Phone"]}',style='labelLarge'),
                         ]),
                         ft.Row([
                             ft.Icon(name=ft.icons.FLAG,color="#16225e"),
-                            ft.Text(value=f'{s["Country"]}',style="labelLarge")
+                            ft.Text(value=f'{s["Country"]}',style='labelLarge'),
                         ]),
-                    ])
+                    ]),
                 ]),
                 ft.CircleAvatar(
-                    content=ft.Text(initials,size=30,color=ft.colors.WHITE),
+                    content=ft.Text(initials, size=30, color=ft.colors.WHITE),
                     bgcolor=get_avatar_color(s["Name"]),
                     radius=40
                 )
@@ -326,10 +325,10 @@ def main(page: ft.Page):
         student_column.controls = items
         page.update()
 
-    ready_made_query_buttons = ft.Column([
+    ready_made_buttons = ft.Column([
         ft.Row([
             ft.ElevatedButton(
-                "Get all students",
+                "Get all Students",
                 bgcolor="#16225e",
                 color="#ffca02",
                 on_click=get_all_students
@@ -344,7 +343,7 @@ def main(page: ft.Page):
                 "Students with rating less than 4",
                 bgcolor="#16225e",
                 color="#ffca02",
-                on_click=less_than_7
+                on_click=less_than_4
             ),
         ],alignment=ft.MainAxisAlignment.SPACE_EVENLY),
         ft.Row([
@@ -361,25 +360,26 @@ def main(page: ft.Page):
                 on_click=load_csv
             ),
             ft.ElevatedButton(
-                "Drop database",
+                "Drop Database",
                 bgcolor="#ffca02",
                 color="#16225e",
                 on_click=drop_database
             ),
-        ],alignment=ft.MainAxisAlignment.SPACE_EVENLY)
+        ],alignment=ft.MainAxisAlignment.SPACE_EVENLY),
     ])
 
-    query_bar = ft.TextField(label="Execute MongoDB Query",width=600,border_radius=20,multiline=True,border_color="#16225e")
+    query_bar = ft.TextField(label='Execute MongoDB Query', width=600, border_radius=20, multiline=True, border_color="#16225e")
     run_query = ft.ElevatedButton("Execute",bgcolor="#16225e",color=ft.colors.WHITE,height=50,on_click=run_query)
     student_column = ft.Column()
 
     page.add(
         ft.Image(src="banner.png"),
-        ready_made_query_buttons,
+        ready_made_buttons,
         ft.Container(height=10),
         ft.Row([query_bar,run_query],alignment=ft.MainAxisAlignment.SPACE_EVENLY),
         ft.Container(height=10),
         student_column
     )
 
-ft.app(target=main, assets_dir="assets")
+
+ft.app(target=main, assets_dir='assets')
